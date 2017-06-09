@@ -1,4 +1,4 @@
-package com.apirest.Produto;
+package com.apirest.Pessoa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -6,31 +6,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(value = "/produto")
+@RequestMapping(value = "/pessoa")
 
-public class ProdutoController {
+public class PessoaController {
 
     @Autowired
-    ProdutoRepository produtoRepository;
+    PessoaRepository pessoaRepository;
 
     @RequestMapping(method = RequestMethod.POST)
-    public void salvar(@RequestBody Produto produto){
-        produtoRepository.salvar(produto);
+    public void salvar(@RequestBody Pessoa pessoa){
+        pessoaRepository.salvar(pessoa);
     }
-
     @RequestMapping(method = RequestMethod.GET)
-    public Collection<Produto> buscarTodos(){
-        return produtoRepository.buscarTodos();
+    public Collection<Pessoa> buscarTodas(){
+        return pessoaRepository.buscarTodas();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity remover(@PathVariable("id") int id){
-        produtoRepository.remover(id);
+        pessoaRepository.remover(id);
         return ResponseEntity.status(200).body("Excluido com sucesso");
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity buscarPor (@PathVariable ("id") int id){
-        return ResponseEntity.status(200).body(produtoRepository.buscarPorId(id));
+        return ResponseEntity.status(200).body(pessoaRepository.buscarPorId(id));
     }
 }
